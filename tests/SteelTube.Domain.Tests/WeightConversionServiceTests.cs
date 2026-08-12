@@ -1,16 +1,17 @@
 ﻿using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SteelTube.Domain.Services;
 using SteelTube.Domain.ValueObjects;
-using Xunit;
 
 namespace SteelTube.Domain.Tests
 {
     // Values taken directly from SRS 7.2 / 7.3 worked examples.
+    [TestClass]
     public class WeightConversionServiceTests
     {
         private readonly IWeightConversionService _sut = new WeightConversionService();
 
-        [Fact]
+        [TestMethod]
         public void CalculateWeight_matches_SRS_example()
         {
             var length = Length.FromMeters(50m);
@@ -21,7 +22,7 @@ namespace SteelTube.Domain.Tests
             weight.Kilograms.Should().Be(6020.0m);
         }
 
-        [Fact]
+        [TestMethod]
         public void CalculateLength_matches_SRS_example()
         {
             var weight = Weight.FromKilograms(6020m);

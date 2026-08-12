@@ -1,17 +1,18 @@
 ﻿using System;
 using FluentAssertions;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SteelTube.Domain.ValueObjects;
-using Xunit;
 
 namespace SteelTube.Domain.Tests
 {
+    [TestClass]
     public class InventoryOperationTests
     {
         private readonly Guid _tubeSpecificationId = Guid.NewGuid();
         private readonly Guid _deviceId = Guid.NewGuid();
         private readonly DateTime _now = DateTime.UtcNow;
 
-        [Fact]
+        [TestMethod]
         public void Purchase_has_positive_signed_length()
         {
             var op = SteelTube.Domain.Entities.InventoryOperation.CreatePurchase(
@@ -21,7 +22,7 @@ namespace SteelTube.Domain.Tests
             op.SignedLengthMeters.Should().Be(50m);
         }
 
-        [Fact]
+        [TestMethod]
         public void Sale_has_negative_signed_length()
         {
             var op = SteelTube.Domain.Entities.InventoryOperation.CreateSale(
@@ -31,7 +32,7 @@ namespace SteelTube.Domain.Tests
             op.SignedLengthMeters.Should().Be(-20m);
         }
 
-        [Fact]
+        [TestMethod]
         public void AdjustmentIncrease_requires_a_note()
         {
             Action act = () => SteelTube.Domain.Entities.InventoryOperation.CreateAdjustmentIncrease(
@@ -40,7 +41,7 @@ namespace SteelTube.Domain.Tests
             act.Should().Throw<ArgumentException>();
         }
 
-        [Fact]
+        [TestMethod]
         public void Two_operations_never_share_an_OperationId()
         {
             var op1 = SteelTube.Domain.Entities.InventoryOperation.CreatePurchase(
