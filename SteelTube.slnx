@@ -1,0 +1,35 @@
+<Solution>
+  <Configurations>
+    <Platform Name="Any CPU" />
+    <Platform Name="x64" />
+  </Configurations>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/SteelTube.Application/SteelTube.Application.csproj" Id="b4bb92a5-0f40-4188-83bf-50a64214d02c">
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
+    <Project Path="src/SteelTube.Desktop/SteelTube.Desktop.csproj" Id="7b1ddcef-a245-4e12-827e-dc6d919869f5">
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
+    <Project Path="src/SteelTube.Domain/SteelTube.Domain.csproj" Id="13ea300f-e163-4081-b96c-9e652415f7b5">
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
+    <Project Path="src/SteelTube.Infrastructure/SteelTube.Infrastructure.csproj" Id="7f7fae1b-2fe3-4a18-bcda-5124ea32fc8d">
+      <Platform Solution="*|x64" Project="x64" />
+      <Platform Solution="Debug|Any CPU" Project="x64" />
+    </Project>
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/SteelTube.Application.Tests/SteelTube.Application.Tests.csproj" Id="669fb332-bac7-47e6-8a9e-038f996ebe27">
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
+    <Project Path="tests/SteelTube.Domain.Tests/SteelTube.Domain.Tests.csproj" Id="f5a2c22b-b75a-4730-8d9b-56e2213aa6f7">
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
+    <Project Path="tests/SteelTube.Infrastructure.Tests/SteelTube.Infrastructure.Tests.csproj" Id="906ca9e3-c9d3-4590-80c9-2fb74c213319">
+      <Platform Solution="*|x64" Project="x64" />
+    </Project>
+  </Folder>
+</Solution>
