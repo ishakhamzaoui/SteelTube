@@ -2,10 +2,15 @@
 using System.Threading;
 using System.Threading.Tasks;
 using SteelTube.Application.Abstractions;
+using SteelTube.Application.Catalogue.AddEntry;
+using SteelTube.Application.Catalogue.GetCatalogue;
+using SteelTube.Application.Catalogue.UpdateEntry;
 using SteelTube.Application.Common;
 using SteelTube.Application.Inventory.AddStock;
 using SteelTube.Application.Inventory.GetCurrentStock;
 using SteelTube.Application.Inventory.RemoveStock;
+using SteelTube.Application.Partners.CreatePartner;
+using SteelTube.Application.Partners.GetPartners;
 using SteelTube.Domain.Services;
 using SteelTube.Infrastructure.Common;
 using SteelTube.Infrastructure.Devices;
@@ -37,9 +42,19 @@ namespace SteelTube.Infrastructure
         public IInventoryBalanceRepository InventoryBalances { get; }
         public IWeightConversionService WeightConversion { get; }
 
+        // Inventory (SAD 18 / 73 Phase 2)
         public AddStockCommandHandler AddStock { get; }
         public RemoveStockCommandHandler RemoveStock { get; }
         public GetCurrentStockQueryHandler GetCurrentStock { get; }
+
+        // Weight Catalogue (SAD 18 / 73 Phase 3)
+        public AddCatalogueEntryCommandHandler AddCatalogueEntry { get; }
+        public UpdateCatalogueEntryCommandHandler UpdateCatalogueEntry { get; }
+        public GetCatalogueQueryHandler GetCatalogue { get; }
+
+        // Business Partners (SAD 18 / 73 Phase 4)
+        public CreatePartnerCommandHandler CreatePartner { get; }
+        public GetPartnersQueryHandler GetPartners { get; }
 
         private CompositionRoot(
             SqliteSession session, IClock clock, IDeviceContext deviceContext, IUnitOfWork unitOfWork,
@@ -68,6 +83,13 @@ namespace SteelTube.Infrastructure
 
             GetCurrentStock = new GetCurrentStockQueryHandler(
                 inventoryBalances, tubeSpecifications, weightCatalogue, weightConversion);
+
+            AddCatalogueEntry = new AddCatalogueEntryCommandHandler(weightCatalogue, unitOfWork, clock);
+            UpdateCatalogueEntry = new UpdateCatalogueEntryCommandHandler(weightCatalogue, unitOfWork, clock);
+            GetCatalogue = new GetCatalogueQueryHandler(weightCatalogue);
+
+            CreatePartner = new CreatePartnerCommandHandler(businessPartners, unitOfWork, clock);
+            GetPartners = new GetPartnersQueryHandler(businessPartners);
         }
 
         /// <summary>

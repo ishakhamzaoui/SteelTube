@@ -69,6 +69,14 @@
     <Compile Include="Abstractions\ITubeSpecificationRepository.cs" />
     <Compile Include="Abstractions\IUnitOfWork.cs" />
     <Compile Include="Abstractions\IWeightCatalogueRepository.cs" />
+    <Compile Include="Catalogue\AddEntry\AddCatalogueEntryCommand.cs" />
+    <Compile Include="Catalogue\AddEntry\AddCatalogueEntryCommandHandler.cs" />
+    <Compile Include="Catalogue\AddEntry\AddCatalogueEntryResult.cs" />
+    <Compile Include="Catalogue\GetCatalogue\GetCatalogueQuery.cs" />
+    <Compile Include="Catalogue\GetCatalogue\GetCatalogueQueryHandler.cs" />
+    <Compile Include="Catalogue\GetCatalogue\WeightCatalogueEntryDto.cs" />
+    <Compile Include="Catalogue\UpdateEntry\UpdateCatalogueEntryCommand.cs" />
+    <Compile Include="Catalogue\UpdateEntry\UpdateCatalogueEntryCommandHandler.cs" />
     <Compile Include="Common\IClock.cs" />
     <Compile Include="Common\UseCaseException.cs" />
     <Compile Include="Inventory\AddStock\AddStockCommand.cs" />
@@ -80,6 +88,12 @@
     <Compile Include="Inventory\RemoveStock\RemoveStockCommand.cs" />
     <Compile Include="Inventory\RemoveStock\RemoveStockCommandHandler.cs" />
     <Compile Include="Inventory\RemoveStock\RemoveStockResult.cs" />
+    <Compile Include="Partners\CreatePartner\CreatePartnerCommand.cs" />
+    <Compile Include="Partners\CreatePartner\CreatePartnerCommandHandler.cs" />
+    <Compile Include="Partners\CreatePartner\CreatePartnerResult.cs" />
+    <Compile Include="Partners\GetPartners\BusinessPartnerDto.cs" />
+    <Compile Include="Partners\GetPartners\GetPartnersQuery.cs" />
+    <Compile Include="Partners\GetPartners\GetPartnersQueryHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
