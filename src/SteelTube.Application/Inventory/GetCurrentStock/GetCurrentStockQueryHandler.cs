@@ -45,7 +45,7 @@ namespace SteelTube.Application.Inventory.GetCurrentStock
 
                 var catalogueEntry = await _catalogue.FindAsync(specification.Diameter, specification.Thickness, ct);
                 decimal? weightKg = null;
-                if (catalogueEntry is not null && balance.QuantityLengthMeters > 0)
+                if (catalogueEntry != null && balance.QuantityLengthMeters > 0)
                 {
                     weightKg = _conversion
                         .CalculateWeight(Length.FromMeters(balance.QuantityLengthMeters), catalogueEntry.KgPerMeter)

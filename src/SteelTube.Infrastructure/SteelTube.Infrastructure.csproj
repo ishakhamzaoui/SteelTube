@@ -94,7 +94,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\SystemClock.cs" />
+    <Compile Include="CompositionRoot.cs" />
+    <Compile Include="Devices\SqliteDeviceContext.cs" />
+    <Compile Include="Persistence\DatabasePathProvider.cs" />
+    <Compile Include="Persistence\DbInitializer.cs" />
+    <Compile Include="Persistence\ISqliteConnectionProvider.cs" />
+    <Compile Include="Persistence\SqlConvert.cs" />
+    <Compile Include="Persistence\SqliteSession.cs" />
+    <Compile Include="Persistence\SqliteUnitOfWork.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\SqliteBusinessPartnerRepository.cs" />
+    <Compile Include="Repositories\SqliteInventoryBalanceRepository.cs" />
+    <Compile Include="Repositories\SqliteInventoryOperationRepository.cs" />
+    <Compile Include="Repositories\SqliteTubeSpecificationRepository.cs" />
+    <Compile Include="Repositories\SqliteWeightCatalogueRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SteelTube.Application\SteelTube.Application.csproj">

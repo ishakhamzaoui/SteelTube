@@ -54,9 +54,9 @@ namespace SteelTube.Application.Inventory.RemoveStock
 
         private async Task<RemoveStockResult> HandleInternalAsync(RemoveStockCommand command, CancellationToken ct)
         {
-            if (command.LengthMeters is null && command.WeightKilograms is null)
+            if (command.LengthMeters == null && command.WeightKilograms == null)
                 throw new UseCaseValidationException("Either a length or a weight must be provided.");
-            if (command.LengthMeters is not null && command.WeightKilograms is not null)
+            if (command.LengthMeters != null && command.WeightKilograms != null)
                 throw new UseCaseValidationException("Provide either a length or a weight, not both.");
 
             var utcNow = _clock.UtcNow;
@@ -70,10 +70,10 @@ namespace SteelTube.Application.Inventory.RemoveStock
             Weight? weight = null;
             KgPerMeter? weightPerMeterUsed = null;
 
-            if (command.LengthMeters is not null)
+            if (command.LengthMeters != null)
             {
                 length = Length.FromMeters(command.LengthMeters.Value);
-                if (catalogueEntry is not null)
+                if (catalogueEntry != null)
                 {
                     weightPerMeterUsed = catalogueEntry.KgPerMeter;
                     weight = _conversion.CalculateWeight(length, catalogueEntry.KgPerMeter);
@@ -81,7 +81,7 @@ namespace SteelTube.Application.Inventory.RemoveStock
             }
             else
             {
-                if (catalogueEntry is null)
+                if (catalogueEntry == null)
                     throw new BusinessRuleViolationException(
                         $"No weight conversion is configured for {specification.DisplayName}.");
 
@@ -110,14 +110,14 @@ namespace SteelTube.Application.Inventory.RemoveStock
                 TubeSpecificationId = specification.Id,
                 ResultingStockLengthMeters = balance.QuantityLengthMeters,
                 CalculatedWeightKilograms = weight?.Kilograms,
-                CalculatedLengthMeters = command.WeightKilograms is not null ? length.Meters : (decimal?)null,
+                CalculatedLengthMeters = command.WeightKilograms != null ? length.Meters : (decimal?)null,
                 ResultsInNegativeStock = balance.IsNegative
             };
         }
 
         private async Task<System.Guid?> ResolvePartnerAsync(RemoveStockCommand command, System.DateTime utcNow, CancellationToken ct)
         {
-            if (command.BusinessPartnerId is not null)
+            if (command.BusinessPartnerId != null)
                 return command.BusinessPartnerId;
 
             if (!string.IsNullOrWhiteSpace(command.BusinessPartnerName))

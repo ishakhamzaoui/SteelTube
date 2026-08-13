@@ -132,6 +132,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompositionRootTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +140,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\SteelTube.Application\SteelTube.Application.csproj">
+      <Project>{b4bb92a5-0f40-4188-83bf-50a64214d02c}</Project>
+      <Name>SteelTube.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\SteelTube.Infrastructure\SteelTube.Infrastructure.csproj">
       <Project>{7f7fae1b-2fe3-4a18-bcda-5124ea32fc8d}</Project>
       <Name>SteelTube.Infrastructure</Name>
