@@ -81,6 +81,8 @@ namespace SteelTube.Application.Inventory.RemoveStock
             }
             else
             {
+                // FIXME: If the weight is provided, but the catalogue entry is missing,
+                // we should still allow the operation to proceed, but we won't be able to calculate the length.
                 if (catalogueEntry == null)
                     throw new BusinessRuleViolationException(
                         $"No weight conversion is configured for {specification.DisplayName}.");
