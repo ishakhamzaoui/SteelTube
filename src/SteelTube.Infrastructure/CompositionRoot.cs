@@ -2,6 +2,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using SteelTube.Application.Abstractions;
+using SteelTube.Application.Backup.CreateBackup;
+using SteelTube.Application.Backup.RestoreBackup;
 using SteelTube.Application.Catalogue.AddEntry;
 using SteelTube.Application.Catalogue.GetCatalogue;
 using SteelTube.Application.Catalogue.UpdateEntry;
@@ -14,6 +16,7 @@ using SteelTube.Application.Inventory.RemoveStock;
 using SteelTube.Application.Partners.CreatePartner;
 using SteelTube.Application.Partners.GetPartners;
 using SteelTube.Domain.Services;
+using SteelTube.Infrastructure.Backup;
 using SteelTube.Infrastructure.Common;
 using SteelTube.Infrastructure.Devices;
 using SteelTube.Infrastructure.Persistence;
@@ -62,6 +65,11 @@ namespace SteelTube.Infrastructure
         public CalculateWeightQueryHandler CalculateWeight { get; }
         public CalculateLengthQueryHandler CalculateLength { get; }
 
+        // Backup / Restore (SAD 18, SAD 45-46, SAD 73 Phase 6)
+        public IBackupService BackupService { get; }
+        public CreateBackupCommandHandler CreateBackup { get; }
+        public RestoreBackupCommandHandler RestoreBackup { get; }
+
         private CompositionRoot(
             SqliteSession session, IClock clock, IDeviceContext deviceContext, IUnitOfWork unitOfWork,
             ITubeSpecificationRepository tubeSpecifications, IBusinessPartnerRepository businessPartners,
@@ -99,6 +107,10 @@ namespace SteelTube.Infrastructure
 
             CalculateWeight = new CalculateWeightQueryHandler(weightCatalogue, weightConversion);
             CalculateLength = new CalculateLengthQueryHandler(weightCatalogue, weightConversion);
+
+            BackupService = new SqliteBackupService(session);
+            CreateBackup = new CreateBackupCommandHandler(BackupService);
+            RestoreBackup = new RestoreBackupCommandHandler(BackupService);
         }
 
         /// <summary>
@@ -110,6 +122,9 @@ namespace SteelTube.Infrastructure
         /// </summary>
         public static async Task<CompositionRoot> CreateAsync(string databasePath = null, CancellationToken ct = default)
         {
+            // Initialize the SQLitePCLRaw provider before using Microsoft.Data.Sqlite.
+            SQLitePCL.Batteries_V2.Init();
+
             var session = new SqliteSession(databasePath ?? DatabasePathProvider.GetDefaultPath());
 
             try

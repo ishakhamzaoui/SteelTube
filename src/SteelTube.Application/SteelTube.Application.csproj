@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Abstractions\IBackupService.cs" />
     <Compile Include="Abstractions\IBusinessPartnerRepository.cs" />
     <Compile Include="Abstractions\IDeviceContext.cs" />
     <Compile Include="Abstractions\IInventoryBalanceRepository.cs" />
@@ -69,6 +70,12 @@
     <Compile Include="Abstractions\ITubeSpecificationRepository.cs" />
     <Compile Include="Abstractions\IUnitOfWork.cs" />
     <Compile Include="Abstractions\IWeightCatalogueRepository.cs" />
+    <Compile Include="Backup\CreateBackup\CreateBackupCommand.cs" />
+    <Compile Include="Backup\CreateBackup\CreateBackupCommandHandler.cs" />
+    <Compile Include="Backup\CreateBackup\CreateBackupResult.cs" />
+    <Compile Include="Backup\RestoreBackup\RestoreBackupCommand.cs" />
+    <Compile Include="Backup\RestoreBackup\RestoreBackupCommandHandler.cs" />
+    <Compile Include="Backup\RestoreBackup\RestoreBackupResult.cs" />
     <Compile Include="Catalogue\AddEntry\AddCatalogueEntryCommand.cs" />
     <Compile Include="Catalogue\AddEntry\AddCatalogueEntryCommandHandler.cs" />
     <Compile Include="Catalogue\AddEntry\AddCatalogueEntryResult.cs" />

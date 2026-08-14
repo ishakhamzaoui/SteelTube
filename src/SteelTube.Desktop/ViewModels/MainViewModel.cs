@@ -43,8 +43,7 @@ namespace SteelTube.Desktop.ViewModels
                 new NavigationItem("Converter", () => new ConverterViewModel(root)),
                 new NavigationItem("History", () => new PlaceholderViewModel(
                     "History", "History and audit trail is coming in a future phase (SAD \u00a710).")),
-                new NavigationItem("Data", () => new PlaceholderViewModel(
-                    "Data", "Export, import, synchronization, and backup/restore are coming in a future phase (SAD \u00a730-46).")),
+                new NavigationItem("Data", () => new BackupViewModel(root)),
                 new NavigationItem("Settings", () => new PlaceholderViewModel(
                     "Settings", "Settings are coming in a future phase (SAD \u00a754).")),
             };

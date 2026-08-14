@@ -36,7 +36,7 @@ namespace SteelTube.Infrastructure.Persistence
             value.ToUniversalTime().ToString(DateTimeFormat, CultureInfo.InvariantCulture);
 
         public static DateTime ToDateTime(object value) =>
-            DateTime.Parse((string)value, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind | DateTimeStyles.AdjustToUniversal);
+            DateTime.Parse((string)value, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
 
         public static object ToParam(object value) => value ?? DBNull.Value;
 

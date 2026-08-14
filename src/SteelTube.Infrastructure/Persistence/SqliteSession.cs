@@ -48,5 +48,21 @@ namespace SteelTube.Infrastructure.Persistence
         }
 
         public void Dispose() => Connection.Dispose();
+
+        /// <summary>
+        /// Closes the live connection so its file can be safely replaced
+        /// (used by <see cref="SteelTube.Infrastructure.Backup.SqliteBackupService.RestoreAsync"/>).
+        /// Also clears Microsoft.Data.Sqlite's internal connection pool for
+        /// this connection string -- otherwise the pool can keep the
+        /// native SQLite file handle open after Close(), which would make
+        /// the file replace fail with a sharing violation on Windows. The
+        /// application must not use this session again afterwards --
+        /// restore always ends with a required restart (SAD 46).
+        /// </summary>
+        public void CloseConnection()
+        {
+            Connection.Close();
+            SqliteConnection.ClearPool(Connection);
+        }
     }
 }

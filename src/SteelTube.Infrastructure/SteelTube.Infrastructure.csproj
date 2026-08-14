@@ -94,6 +94,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Backup\SqliteBackupService.cs" />
     <Compile Include="Common\SystemClock.cs" />
     <Compile Include="CompositionRoot.cs" />
     <Compile Include="Devices\SqliteDeviceContext.cs" />

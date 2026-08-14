@@ -75,6 +75,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\BackupViewModel.cs" />
     <Compile Include="ViewModels\CatalogueViewModel.cs" />
     <Compile Include="ViewModels\ConverterViewModel.cs" />
     <Compile Include="ViewModels\CurrentStockViewModel.cs" />
@@ -84,6 +85,9 @@
     <Compile Include="ViewModels\PartnersViewModel.cs" />
     <Compile Include="ViewModels\PlaceholderViewModel.cs" />
     <Compile Include="ViewModels\StockMovementViewModel.cs" />
+    <Compile Include="Views\BackupView.xaml.cs">
+      <DependentUpon>BackupView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CatalogueView.xaml.cs">
       <DependentUpon>CatalogueView.xaml</DependentUpon>
     </Compile>
@@ -123,6 +127,9 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\BackupView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CatalogueView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
