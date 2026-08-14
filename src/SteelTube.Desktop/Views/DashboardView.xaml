@@ -1,0 +1,35 @@
+<UserControl x:Class="SteelTube.Desktop.Views.DashboardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+        <TextBlock Text="Dashboard" Style="{StaticResource HeaderText}" />
+
+        <TextBlock Text="{Binding ErrorMessage}" Style="{StaticResource ErrorBanner}"
+                    Visibility="{Binding ErrorMessage, Converter={StaticResource StringToVisibility}}" />
+
+        <StackPanel Orientation="Horizontal" Visibility="{Binding IsBusy, Converter={StaticResource BoolToVisibility}}">
+            <TextBlock Text="Loading..." />
+        </StackPanel>
+
+        <UniformGrid Columns="3" Rows="1" Margin="0,12,0,0">
+            <Border Background="#F5F7FA" CornerRadius="6" Padding="20" Margin="0,0,12,0">
+                <StackPanel>
+                    <TextBlock Text="Materials in stock" Style="{StaticResource FieldLabel}" />
+                    <TextBlock Text="{Binding MaterialCount}" FontSize="32" FontWeight="Bold" />
+                </StackPanel>
+            </Border>
+            <Border Background="#F5F7FA" CornerRadius="6" Padding="20" Margin="0,0,12,0">
+                <StackPanel>
+                    <TextBlock Text="Total length (m)" Style="{StaticResource FieldLabel}" />
+                    <TextBlock Text="{Binding TotalLengthMeters, StringFormat={}{0:0.###}}" FontSize="32" FontWeight="Bold" />
+                </StackPanel>
+            </Border>
+            <Border Background="#FDECEC" CornerRadius="6" Padding="20">
+                <StackPanel>
+                    <TextBlock Text="Materials with negative stock" Style="{StaticResource FieldLabel}" />
+                    <TextBlock Text="{Binding NegativeStockCount}" FontSize="32" FontWeight="Bold" Foreground="#B00020" />
+                </StackPanel>
+            </Border>
+        </UniformGrid>
+    </StackPanel>
+</UserControl>

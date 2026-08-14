@@ -6,6 +6,8 @@ using SteelTube.Application.Catalogue.AddEntry;
 using SteelTube.Application.Catalogue.GetCatalogue;
 using SteelTube.Application.Catalogue.UpdateEntry;
 using SteelTube.Application.Common;
+using SteelTube.Application.Conversion.CalculateLength;
+using SteelTube.Application.Conversion.CalculateWeight;
 using SteelTube.Application.Inventory.AddStock;
 using SteelTube.Application.Inventory.GetCurrentStock;
 using SteelTube.Application.Inventory.RemoveStock;
@@ -56,6 +58,10 @@ namespace SteelTube.Infrastructure
         public CreatePartnerCommandHandler CreatePartner { get; }
         public GetPartnersQueryHandler GetPartners { get; }
 
+        // Conversion (SAD 18, SAD 14-16)
+        public CalculateWeightQueryHandler CalculateWeight { get; }
+        public CalculateLengthQueryHandler CalculateLength { get; }
+
         private CompositionRoot(
             SqliteSession session, IClock clock, IDeviceContext deviceContext, IUnitOfWork unitOfWork,
             ITubeSpecificationRepository tubeSpecifications, IBusinessPartnerRepository businessPartners,
@@ -90,6 +96,9 @@ namespace SteelTube.Infrastructure
 
             CreatePartner = new CreatePartnerCommandHandler(businessPartners, unitOfWork, clock);
             GetPartners = new GetPartnersQueryHandler(businessPartners);
+
+            CalculateWeight = new CalculateWeightQueryHandler(weightCatalogue, weightConversion);
+            CalculateLength = new CalculateLengthQueryHandler(weightCatalogue, weightConversion);
         }
 
         /// <summary>

@@ -79,6 +79,12 @@
     <Compile Include="Catalogue\UpdateEntry\UpdateCatalogueEntryCommandHandler.cs" />
     <Compile Include="Common\IClock.cs" />
     <Compile Include="Common\UseCaseException.cs" />
+    <Compile Include="Conversion\CalculateLength\CalculateLengthQuery.cs" />
+    <Compile Include="Conversion\CalculateLength\CalculateLengthQueryHandler.cs" />
+    <Compile Include="Conversion\CalculateLength\CalculateLengthResult.cs" />
+    <Compile Include="Conversion\CalculateWeight\CalculateWeightQuery.cs" />
+    <Compile Include="Conversion\CalculateWeight\CalculateWeightQueryHandler.cs" />
+    <Compile Include="Conversion\CalculateWeight\CalculateWeightResult.cs" />
     <Compile Include="Inventory\AddStock\AddStockCommand.cs" />
     <Compile Include="Inventory\AddStock\AddStockCommandHandler.cs" />
     <Compile Include="Inventory\AddStock\AddStockResult.cs" />

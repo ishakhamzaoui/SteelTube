@@ -75,6 +75,36 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\CatalogueViewModel.cs" />
+    <Compile Include="ViewModels\ConverterViewModel.cs" />
+    <Compile Include="ViewModels\CurrentStockViewModel.cs" />
+    <Compile Include="ViewModels\DashboardViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\NavigationItem.cs" />
+    <Compile Include="ViewModels\PartnersViewModel.cs" />
+    <Compile Include="ViewModels\PlaceholderViewModel.cs" />
+    <Compile Include="ViewModels\StockMovementViewModel.cs" />
+    <Compile Include="Views\CatalogueView.xaml.cs">
+      <DependentUpon>CatalogueView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ConverterView.xaml.cs">
+      <DependentUpon>ConverterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CurrentStockView.xaml.cs">
+      <DependentUpon>CurrentStockView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DashboardView.xaml.cs">
+      <DependentUpon>DashboardView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PartnersView.xaml.cs">
+      <DependentUpon>PartnersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlaceholderView.xaml.cs">
+      <DependentUpon>PlaceholderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StockMovementView.xaml.cs">
+      <DependentUpon>StockMovementView.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -83,10 +113,37 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Common\AsyncRelayCommand.cs" />
+    <Compile Include="Common\InverseBooleanConverter.cs" />
+    <Compile Include="Common\InverseBooleanToVisibilityConverter.cs" />
+    <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Common\StringToVisibilityConverter.cs" />
+    <Compile Include="Common\ViewModelBase.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\CatalogueView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ConverterView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CurrentStockView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DashboardView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PartnersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlaceholderView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StockMovementView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

@@ -1,12 +1,47 @@
 ﻿<Window x:Class="SteelTube.Desktop.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SteelTube.Desktop"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        xmlns:vm="clr-namespace:SteelTube.Desktop.ViewModels"
+        Title="SteelTube" Height="720" Width="1100" WindowStartupLocation="CenterScreen">
+
+    <!-- Layout follows the shell sketch in SAD 49: a left navigation rail, a content area on the right. -->
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border Grid.Column="0" Background="#2C3E50">
+            <DockPanel LastChildFill="True">
+                <TextBlock DockPanel.Dock="Top" Text="SteelTube" Foreground="White" FontSize="20"
+                           FontWeight="Bold" Margin="16,20,16,20" />
+                <ListBox ItemsSource="{Binding NavigationItems}"
+                         SelectedItem="{Binding SelectedItem}"
+                         Background="Transparent" BorderThickness="0">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Padding" Value="16,10" />
+                            <Setter Property="Foreground" Value="#ECF0F1" />
+                            <Setter Property="FontSize" Value="15" />
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Style.Triggers>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter Property="Background" Value="#34495E" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type vm:NavigationItem}">
+                            <TextBlock Text="{Binding Title}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </DockPanel>
+        </Border>
+
+        <Border Grid.Column="1" Background="White" Padding="32">
+            <ContentControl Content="{Binding CurrentViewModel}" />
+        </Border>
     </Grid>
 </Window>

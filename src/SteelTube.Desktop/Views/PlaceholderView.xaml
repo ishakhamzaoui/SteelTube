@@ -1,0 +1,8 @@
+<UserControl x:Class="SteelTube.Desktop.Views.PlaceholderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+        <TextBlock Text="{Binding Title}" Style="{StaticResource HeaderText}" />
+        <TextBlock Text="{Binding Message}" TextWrapping="Wrap" Foreground="#777777" FontSize="15" />
+    </StackPanel>
+</UserControl>
