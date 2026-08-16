@@ -126,7 +126,6 @@
     <Compile Include="Synchronization\Export\ExportOperationsCommand.cs" />
     <Compile Include="Synchronization\Export\ExportOperationsCommandHandler.cs" />
     <Compile Include="Synchronization\Export\ExportOperationsResult.cs" />
-    <Compile Include="Synchronization\JsonSynchronizationSerializer.cs" />
     <Compile Include="Synchronization\PreviewImport\AffectedMaterialPreview.cs" />
     <Compile Include="Synchronization\PreviewImport\PreviewImportQuery.cs" />
     <Compile Include="Synchronization\PreviewImport\PreviewImportQueryHandler.cs" />

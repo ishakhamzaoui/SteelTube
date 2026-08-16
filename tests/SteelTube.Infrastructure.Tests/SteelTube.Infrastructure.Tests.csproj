@@ -134,6 +134,7 @@
   <ItemGroup>
     <Compile Include="BackupServiceTests.cs" />
     <Compile Include="CompositionRootTests.cs" />
+    <Compile Include="DiagnosticsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StockHistoryTests.cs" />
     <Compile Include="SynchronizationTests.cs" />

@@ -98,7 +98,6 @@
     <Compile Include="Common\SystemClock.cs" />
     <Compile Include="CompositionRoot.cs" />
     <Compile Include="Devices\SqliteDeviceContext.cs" />
-    <Compile Include="DiagnosticsTests.cs" />
     <Compile Include="Diagnostics\SqliteDataIntegrityChecker.cs" />
     <Compile Include="Persistence\DatabasePathProvider.cs" />
     <Compile Include="Persistence\DbInitializer.cs" />
@@ -112,6 +111,7 @@
     <Compile Include="Repositories\SqliteInventoryOperationRepository.cs" />
     <Compile Include="Repositories\SqliteTubeSpecificationRepository.cs" />
     <Compile Include="Repositories\SqliteWeightCatalogueRepository.cs" />
+    <Compile Include="Synchronization\JsonSynchronizationSerializer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SteelTube.Application\SteelTube.Application.csproj">
