@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Abstractions\IBackupService.cs" />
     <Compile Include="Abstractions\IBusinessPartnerRepository.cs" />
+    <Compile Include="Abstractions\IDataIntegrityChecker.cs" />
     <Compile Include="Abstractions\IDeviceContext.cs" />
     <Compile Include="Abstractions\IInventoryBalanceRepository.cs" />
     <Compile Include="Abstractions\IInventoryOperationRepository.cs" />
@@ -93,6 +94,12 @@
     <Compile Include="Conversion\CalculateWeight\CalculateWeightQuery.cs" />
     <Compile Include="Conversion\CalculateWeight\CalculateWeightQueryHandler.cs" />
     <Compile Include="Conversion\CalculateWeight\CalculateWeightResult.cs" />
+    <Compile Include="Diagnostics\CheckIntegrity\CheckIntegrityQuery.cs" />
+    <Compile Include="Diagnostics\CheckIntegrity\CheckIntegrityQueryHandler.cs" />
+    <Compile Include="Diagnostics\CheckIntegrity\CheckIntegrityResult.cs" />
+    <Compile Include="Diagnostics\CheckIntegrity\ProjectionMismatch.cs" />
+    <Compile Include="Diagnostics\RepairProjection\RepairProjectionCommand.cs" />
+    <Compile Include="Diagnostics\RepairProjection\RepairProjectionCommandHandler.cs" />
     <Compile Include="Inventory\AddStock\AddStockCommand.cs" />
     <Compile Include="Inventory\AddStock\AddStockCommandHandler.cs" />
     <Compile Include="Inventory\AddStock\AddStockResult.cs" />

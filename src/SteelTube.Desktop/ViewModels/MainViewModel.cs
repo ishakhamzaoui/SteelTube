@@ -44,6 +44,7 @@ namespace SteelTube.Desktop.ViewModels
                 new NavigationItem("History", () => new HistoryViewModel(root)),
                 new NavigationItem("Data", () => new BackupViewModel(root)),
                 new NavigationItem("Synchronize", () => new SynchronizationViewModel(root)),
+                new NavigationItem("Diagnostics", () => new DiagnosticsViewModel(root)),
                 new NavigationItem("Settings", () => new PlaceholderViewModel(
                     "Settings", "Settings are coming in a future phase (SAD \u00a754).")),
             };

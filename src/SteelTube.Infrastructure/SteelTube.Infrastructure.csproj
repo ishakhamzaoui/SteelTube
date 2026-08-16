@@ -98,6 +98,8 @@
     <Compile Include="Common\SystemClock.cs" />
     <Compile Include="CompositionRoot.cs" />
     <Compile Include="Devices\SqliteDeviceContext.cs" />
+    <Compile Include="DiagnosticsTests.cs" />
+    <Compile Include="Diagnostics\SqliteDataIntegrityChecker.cs" />
     <Compile Include="Persistence\DatabasePathProvider.cs" />
     <Compile Include="Persistence\DbInitializer.cs" />
     <Compile Include="Persistence\ISqliteConnectionProvider.cs" />

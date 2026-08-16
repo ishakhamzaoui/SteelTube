@@ -10,6 +10,8 @@ using SteelTube.Application.Catalogue.UpdateEntry;
 using SteelTube.Application.Common;
 using SteelTube.Application.Conversion.CalculateLength;
 using SteelTube.Application.Conversion.CalculateWeight;
+using SteelTube.Application.Diagnostics.CheckIntegrity;
+using SteelTube.Application.Diagnostics.RepairProjection;
 using SteelTube.Application.Inventory.AddStock;
 using SteelTube.Application.Inventory.GetCurrentStock;
 using SteelTube.Application.Inventory.GetStockHistory;
@@ -23,6 +25,7 @@ using SteelTube.Domain.Services;
 using SteelTube.Infrastructure.Backup;
 using SteelTube.Infrastructure.Common;
 using SteelTube.Infrastructure.Devices;
+using SteelTube.Infrastructure.Diagnostics;
 using SteelTube.Infrastructure.Persistence;
 using SteelTube.Infrastructure.Repositories;
 using SteelTube.Infrastructure.Synchronization;
@@ -81,6 +84,10 @@ namespace SteelTube.Infrastructure
         public PreviewImportQueryHandler PreviewImport { get; }
         public ApplyImportCommandHandler ApplyImport { get; }
 
+        // Diagnostics (SAD 65, SAD 73 Phase 8)
+        public CheckIntegrityQueryHandler CheckIntegrity { get; }
+        public RepairProjectionCommandHandler RepairProjection { get; }
+
         private CompositionRoot(
             SqliteSession session, IClock clock, IDeviceContext deviceContext, IUnitOfWork unitOfWork,
             ITubeSpecificationRepository tubeSpecifications, IBusinessPartnerRepository businessPartners,
@@ -132,6 +139,11 @@ namespace SteelTube.Infrastructure
             ApplyImport = new ApplyImportCommandHandler(
                 serializer, inventoryOperations, tubeSpecifications, businessPartners, inventoryBalances,
                 BackupService, unitOfWork, clock);
+
+            var integrityChecker = new SqliteDataIntegrityChecker(session);
+            CheckIntegrity = new CheckIntegrityQueryHandler(
+                integrityChecker, tubeSpecifications, weightCatalogue, inventoryOperations, inventoryBalances, clock);
+            RepairProjection = new RepairProjectionCommandHandler(inventoryBalances, unitOfWork);
         }
 
         /// <summary>
