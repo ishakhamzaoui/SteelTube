@@ -85,6 +85,7 @@
     <Compile Include="ViewModels\PartnersViewModel.cs" />
     <Compile Include="ViewModels\PlaceholderViewModel.cs" />
     <Compile Include="ViewModels\StockMovementViewModel.cs" />
+    <Compile Include="ViewModels\SynchronizationViewModel.cs" />
     <Compile Include="Views\BackupView.xaml.cs">
       <DependentUpon>BackupView.xaml</DependentUpon>
     </Compile>
@@ -108,6 +109,9 @@
     </Compile>
     <Compile Include="Views\StockMovementView.xaml.cs">
       <DependentUpon>StockMovementView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SynchronizationView.xaml.cs">
+      <DependentUpon>SynchronizationView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -149,6 +153,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\StockMovementView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SynchronizationView.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>

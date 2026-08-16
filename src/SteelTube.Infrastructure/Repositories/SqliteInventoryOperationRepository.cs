@@ -154,6 +154,21 @@ namespace SteelTube.Infrastructure.Repositories
             }
         }
 
+        public async Task<IReadOnlyList<InventoryOperation>> GetAllAsync(CancellationToken ct = default)
+        {
+            using (var command = CreateCommand(
+                "SELECT " + SelectColumns + " FROM InventoryOperations ORDER BY OperationDate ASC, InsertedAt ASC;"))
+            {
+                var results = new List<InventoryOperation>();
+                using (var reader = await command.ExecuteReaderAsync(ct))
+                {
+                    while (await reader.ReadAsync(ct))
+                        results.Add(MapStatic(reader));
+                }
+                return results;
+            }
+        }
+
         private SqliteCommand CreateCommand(string sql)
         {
             var command = _provider.Connection.CreateCommand();

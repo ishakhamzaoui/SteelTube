@@ -25,6 +25,15 @@ namespace SteelTube.Application.Abstractions
 
         /// <summary>Used to rebuild InventoryBalance from scratch (SAD 22).</summary>
         Task<IReadOnlyList<InventoryOperation>> GetAllForTubeSpecificationAsync(Guid tubeSpecificationId, CancellationToken ct = default);
+
+        /// <summary>
+        /// Every local operation, unbounded (unlike <see cref="GetHistoryAsync"/>,
+        /// which pages). Used for full synchronization export (SAD 30-32) --
+        /// incremental export (SRS 12.7) can layer on top of
+        /// <see cref="GetByOriginDeviceAfterSequenceAsync"/> later without
+        /// changing this.
+        /// </summary>
+        Task<IReadOnlyList<InventoryOperation>> GetAllAsync(CancellationToken ct = default);
     }
 
     /// <summary>Filter for SAD 59 indexed history queries / SRS 10.3.</summary>

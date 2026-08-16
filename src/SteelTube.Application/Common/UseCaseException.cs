@@ -18,4 +18,18 @@ namespace SteelTube.Application.Common
     {
         public UseCaseValidationException(string message) : base(message) { }
     }
+
+    /// <summary>
+    /// SAD 51's "Synchronization Errors" category, kept distinct from
+    /// general validation so a future Logging phase (SAD 53, which lists
+    /// "Synchronization" as its own log category) can filter on it.
+    /// Covers: corrupt/malformed package JSON, an unsupported
+    /// formatVersion (SAD 43), or a structurally invalid operation inside
+    /// an otherwise-parseable package.
+    /// </summary>
+    public sealed class SynchronizationException : UseCaseException
+    {
+        public SynchronizationException(string message) : base(message) { }
+        public SynchronizationException(string message, Exception innerException) : base(message, innerException) { }
+    }
 }

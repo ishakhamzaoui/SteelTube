@@ -19,11 +19,13 @@ namespace SteelTube.Infrastructure.Devices
         private readonly ISqliteConnectionProvider _provider;
 
         public Guid DeviceId { get; }
+        public string DeviceName { get; }
 
-        private SqliteDeviceContext(ISqliteConnectionProvider provider, Guid deviceId)
+        private SqliteDeviceContext(ISqliteConnectionProvider provider, Guid deviceId, string deviceName)
         {
             _provider = provider;
             DeviceId = deviceId;
+            DeviceName = deviceName;
         }
 
         /// <summary>
@@ -37,25 +39,28 @@ namespace SteelTube.Infrastructure.Devices
             using (var select = provider.Connection.CreateCommand())
             {
                 select.Transaction = provider.CurrentTransaction;
-                select.CommandText = "SELECT Id FROM Devices LIMIT 1;";
-                var existing = await select.ExecuteScalarAsync(ct);
-                if (existing != null)
-                    return new SqliteDeviceContext(provider, SqlConvert.ToGuid(existing));
+                select.CommandText = "SELECT Id, Name FROM Devices LIMIT 1;";
+                using (var reader = await select.ExecuteReaderAsync(ct))
+                {
+                    if (await reader.ReadAsync(ct))
+                        return new SqliteDeviceContext(provider, SqlConvert.ToGuid(reader.GetValue(0)), reader.GetString(1));
+                }
             }
 
             var deviceId = Guid.NewGuid();
+            var deviceName = Environment.MachineName;
             using (var insert = provider.Connection.CreateCommand())
             {
                 insert.Transaction = provider.CurrentTransaction;
                 insert.CommandText =
                     "INSERT INTO Devices (Id, Name, CreatedAt, LastSequenceNumber) VALUES ($id, $name, $createdAt, 0);";
                 insert.Parameters.AddWithValue("$id", SqlConvert.ToText(deviceId));
-                insert.Parameters.AddWithValue("$name", Environment.MachineName);
+                insert.Parameters.AddWithValue("$name", deviceName);
                 insert.Parameters.AddWithValue("$createdAt", SqlConvert.ToText(DateTime.UtcNow));
                 await insert.ExecuteNonQueryAsync(ct);
             }
 
-            return new SqliteDeviceContext(provider, deviceId);
+            return new SqliteDeviceContext(provider, deviceId, deviceName);
         }
 
         public async Task<long> NextSequenceNumberAsync(CancellationToken ct = default)

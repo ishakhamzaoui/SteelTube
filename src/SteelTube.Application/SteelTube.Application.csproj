@@ -67,6 +67,7 @@
     <Compile Include="Abstractions\IDeviceContext.cs" />
     <Compile Include="Abstractions\IInventoryBalanceRepository.cs" />
     <Compile Include="Abstractions\IInventoryOperationRepository.cs" />
+    <Compile Include="Abstractions\ISynchronizationSerializer.cs" />
     <Compile Include="Abstractions\ITubeSpecificationRepository.cs" />
     <Compile Include="Abstractions\IUnitOfWork.cs" />
     <Compile Include="Abstractions\IWeightCatalogueRepository.cs" />
@@ -108,6 +109,20 @@
     <Compile Include="Partners\GetPartners\GetPartnersQuery.cs" />
     <Compile Include="Partners\GetPartners\GetPartnersQueryHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Synchronization\ApplyImport\ApplyImportCommand.cs" />
+    <Compile Include="Synchronization\ApplyImport\ApplyImportCommandHandler.cs" />
+    <Compile Include="Synchronization\ApplyImport\ApplyImportResult.cs" />
+    <Compile Include="Synchronization\ApplyImport\NegativeStockWarning.cs" />
+    <Compile Include="Synchronization\Export\ExportOperationsCommand.cs" />
+    <Compile Include="Synchronization\Export\ExportOperationsCommandHandler.cs" />
+    <Compile Include="Synchronization\Export\ExportOperationsResult.cs" />
+    <Compile Include="Synchronization\JsonSynchronizationSerializer.cs" />
+    <Compile Include="Synchronization\PreviewImport\AffectedMaterialPreview.cs" />
+    <Compile Include="Synchronization\PreviewImport\PreviewImportQuery.cs" />
+    <Compile Include="Synchronization\PreviewImport\PreviewImportQueryHandler.cs" />
+    <Compile Include="Synchronization\PreviewImport\PreviewImportResult.cs" />
+    <Compile Include="Synchronization\SynchronizationPackage.cs" />
+    <Compile Include="Synchronization\SynchronizedOperationDto.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SteelTube.Domain\SteelTube.Domain.csproj">

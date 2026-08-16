@@ -15,12 +15,16 @@ using SteelTube.Application.Inventory.GetCurrentStock;
 using SteelTube.Application.Inventory.RemoveStock;
 using SteelTube.Application.Partners.CreatePartner;
 using SteelTube.Application.Partners.GetPartners;
+using SteelTube.Application.Synchronization.ApplyImport;
+using SteelTube.Application.Synchronization.Export;
+using SteelTube.Application.Synchronization.PreviewImport;
 using SteelTube.Domain.Services;
 using SteelTube.Infrastructure.Backup;
 using SteelTube.Infrastructure.Common;
 using SteelTube.Infrastructure.Devices;
 using SteelTube.Infrastructure.Persistence;
 using SteelTube.Infrastructure.Repositories;
+using SteelTube.Infrastructure.Synchronization;
 
 namespace SteelTube.Infrastructure
 {
@@ -70,6 +74,11 @@ namespace SteelTube.Infrastructure
         public CreateBackupCommandHandler CreateBackup { get; }
         public RestoreBackupCommandHandler RestoreBackup { get; }
 
+        // Synchronization (SAD 18, SAD 30-46, SAD 73 Phase 7)
+        public ExportOperationsCommandHandler ExportOperations { get; }
+        public PreviewImportQueryHandler PreviewImport { get; }
+        public ApplyImportCommandHandler ApplyImport { get; }
+
         private CompositionRoot(
             SqliteSession session, IClock clock, IDeviceContext deviceContext, IUnitOfWork unitOfWork,
             ITubeSpecificationRepository tubeSpecifications, IBusinessPartnerRepository businessPartners,
@@ -111,6 +120,14 @@ namespace SteelTube.Infrastructure
             BackupService = new SqliteBackupService(session);
             CreateBackup = new CreateBackupCommandHandler(BackupService);
             RestoreBackup = new RestoreBackupCommandHandler(BackupService);
+
+            var serializer = new JsonSynchronizationSerializer();
+            ExportOperations = new ExportOperationsCommandHandler(
+                inventoryOperations, tubeSpecifications, businessPartners, deviceContext, serializer, clock);
+            PreviewImport = new PreviewImportQueryHandler(serializer, inventoryOperations, tubeSpecifications, inventoryBalances);
+            ApplyImport = new ApplyImportCommandHandler(
+                serializer, inventoryOperations, tubeSpecifications, businessPartners, inventoryBalances,
+                BackupService, unitOfWork, clock);
         }
 
         /// <summary>
