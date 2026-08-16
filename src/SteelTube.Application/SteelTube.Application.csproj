@@ -99,6 +99,9 @@
     <Compile Include="Inventory\GetCurrentStock\CurrentStockItem.cs" />
     <Compile Include="Inventory\GetCurrentStock\GetCurrentStockQuery.cs" />
     <Compile Include="Inventory\GetCurrentStock\GetCurrentStockQueryHandler.cs" />
+    <Compile Include="Inventory\GetStockHistory\GetStockHistoryQuery.cs" />
+    <Compile Include="Inventory\GetStockHistory\GetStockHistoryQueryHandler.cs" />
+    <Compile Include="Inventory\GetStockHistory\StockHistoryItem.cs" />
     <Compile Include="Inventory\RemoveStock\RemoveStockCommand.cs" />
     <Compile Include="Inventory\RemoveStock\RemoveStockCommandHandler.cs" />
     <Compile Include="Inventory\RemoveStock\RemoveStockResult.cs" />

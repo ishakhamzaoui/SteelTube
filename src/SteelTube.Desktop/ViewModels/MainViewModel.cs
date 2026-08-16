@@ -41,8 +41,7 @@ namespace SteelTube.Desktop.ViewModels
                 new NavigationItem("Partners", () => new PartnersViewModel(root)),
                 new NavigationItem("Weight Catalogue", () => new CatalogueViewModel(root)),
                 new NavigationItem("Converter", () => new ConverterViewModel(root)),
-                new NavigationItem("History", () => new PlaceholderViewModel(
-                    "History", "History and audit trail is coming in a future phase (SAD \u00a710).")),
+                new NavigationItem("History", () => new HistoryViewModel(root)),
                 new NavigationItem("Data", () => new BackupViewModel(root)),
                 new NavigationItem("Synchronize", () => new SynchronizationViewModel(root)),
                 new NavigationItem("Settings", () => new PlaceholderViewModel(

@@ -12,6 +12,7 @@ using SteelTube.Application.Conversion.CalculateLength;
 using SteelTube.Application.Conversion.CalculateWeight;
 using SteelTube.Application.Inventory.AddStock;
 using SteelTube.Application.Inventory.GetCurrentStock;
+using SteelTube.Application.Inventory.GetStockHistory;
 using SteelTube.Application.Inventory.RemoveStock;
 using SteelTube.Application.Partners.CreatePartner;
 using SteelTube.Application.Partners.GetPartners;
@@ -55,6 +56,7 @@ namespace SteelTube.Infrastructure
         public AddStockCommandHandler AddStock { get; }
         public RemoveStockCommandHandler RemoveStock { get; }
         public GetCurrentStockQueryHandler GetCurrentStock { get; }
+        public GetStockHistoryQueryHandler GetStockHistory { get; }
 
         // Weight Catalogue (SAD 18 / 73 Phase 3)
         public AddCatalogueEntryCommandHandler AddCatalogueEntry { get; }
@@ -106,6 +108,8 @@ namespace SteelTube.Infrastructure
 
             GetCurrentStock = new GetCurrentStockQueryHandler(
                 inventoryBalances, tubeSpecifications, weightCatalogue, weightConversion);
+
+            GetStockHistory = new GetStockHistoryQueryHandler(inventoryOperations, tubeSpecifications, businessPartners);
 
             AddCatalogueEntry = new AddCatalogueEntryCommandHandler(weightCatalogue, unitOfWork, clock);
             UpdateCatalogueEntry = new UpdateCatalogueEntryCommandHandler(weightCatalogue, unitOfWork, clock);

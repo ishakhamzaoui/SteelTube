@@ -42,6 +42,7 @@ namespace SteelTube.Desktop.ViewModels
         public AsyncRelayCommand RefreshCommand { get; }
         public AsyncRelayCommand AddCommand { get; }
         public AsyncRelayCommand UpdateSelectedCommand { get; }
+        public RelayCommand ExportCsvCommand { get; }
 
         public CatalogueViewModel(CompositionRoot root)
         {
@@ -49,7 +50,17 @@ namespace SteelTube.Desktop.ViewModels
             RefreshCommand = new AsyncRelayCommand(RefreshAsync);
             AddCommand = new AsyncRelayCommand(AddAsync);
             UpdateSelectedCommand = new AsyncRelayCommand(UpdateSelectedAsync, () => SelectedEntry != null);
+            ExportCsvCommand = new RelayCommand(ExportCsv);
             _ = RefreshAsync();
+        }
+
+        private void ExportCsv()
+        {
+            CsvExporter.ExportWithDialog(Entries, "WeightCatalogue.csv",
+                ("Diameter (mm)", r => r.DiameterMm),
+                ("Thickness (mm)", r => r.ThicknessMm),
+                ("Kg/m", r => r.KgPerMeter),
+                ("Updated", r => r.UpdatedAt));
         }
 
         private Task RefreshAsync() => RunAsync(async () =>

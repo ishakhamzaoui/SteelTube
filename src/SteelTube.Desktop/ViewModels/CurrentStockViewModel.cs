@@ -13,12 +13,23 @@ namespace SteelTube.Desktop.ViewModels
         public ObservableCollection<CurrentStockItem> Items { get; } = new ObservableCollection<CurrentStockItem>();
 
         public AsyncRelayCommand RefreshCommand { get; }
+        public RelayCommand ExportCsvCommand { get; }
 
         public CurrentStockViewModel(CompositionRoot root)
         {
             _root = root;
             RefreshCommand = new AsyncRelayCommand(RefreshAsync);
+            ExportCsvCommand = new RelayCommand(ExportCsv);
             _ = RefreshAsync();
+        }
+
+        private void ExportCsv()
+        {
+            CsvExporter.ExportWithDialog(Items, "CurrentStock.csv",
+                ("Diameter (mm)", r => r.DiameterMm),
+                ("Thickness (mm)", r => r.ThicknessMm),
+                ("Stock Length (m)", r => r.QuantityLengthMeters),
+                ("Weight (kg)", r => r.QuantityWeightKilograms));
         }
 
         private System.Threading.Tasks.Task RefreshAsync() => RunAsync(async () =>

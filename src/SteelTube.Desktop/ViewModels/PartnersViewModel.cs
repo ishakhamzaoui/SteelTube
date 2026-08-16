@@ -26,13 +26,23 @@ namespace SteelTube.Desktop.ViewModels
 
         public AsyncRelayCommand RefreshCommand { get; }
         public AsyncRelayCommand CreateCommand { get; }
+        public RelayCommand ExportCsvCommand { get; }
 
         public PartnersViewModel(CompositionRoot root)
         {
             _root = root;
             RefreshCommand = new AsyncRelayCommand(RefreshAsync);
             CreateCommand = new AsyncRelayCommand(CreateAsync);
+            ExportCsvCommand = new RelayCommand(ExportCsv);
             _ = RefreshAsync();
+        }
+
+        private void ExportCsv()
+        {
+            CsvExporter.ExportWithDialog(Partners, "Partners.csv",
+                ("Name", r => r.Name),
+                ("Provider", r => r.IsProvider),
+                ("Customer", r => r.IsCustomer));
         }
 
         private Task RefreshAsync() => RunAsync(async () =>

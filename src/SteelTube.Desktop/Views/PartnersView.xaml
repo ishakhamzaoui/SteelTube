@@ -1,37 +1,38 @@
 <UserControl x:Class="SteelTube.Desktop.Views.PartnersView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="360" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="360" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Margin="0,0,32,0">
-            <TextBlock Text="Partners" Style="{StaticResource HeaderText}" />
+		<StackPanel Grid.Column="0" Margin="0,0,32,0">
+			<TextBlock Text="Partners" Style="{StaticResource HeaderText}" />
 
-            <TextBlock Text="{Binding ErrorMessage}" Style="{StaticResource ErrorBanner}"
+			<TextBlock Text="{Binding ErrorMessage}" Style="{StaticResource ErrorBanner}"
                         Visibility="{Binding ErrorMessage, Converter={StaticResource StringToVisibility}}" />
-            <TextBlock Text="{Binding SuccessMessage}" Style="{StaticResource SuccessBanner}"
+			<TextBlock Text="{Binding SuccessMessage}" Style="{StaticResource SuccessBanner}"
                         Visibility="{Binding SuccessMessage, Converter={StaticResource StringToVisibility}}" />
 
-            <TextBlock Text="New partner name" Style="{StaticResource FieldLabel}" />
-            <TextBox Text="{Binding NewName, UpdateSourceTrigger=PropertyChanged}" />
+			<TextBlock Text="New partner name" Style="{StaticResource FieldLabel}" />
+			<TextBox Text="{Binding NewName, UpdateSourceTrigger=PropertyChanged}" />
 
-            <StackPanel Orientation="Horizontal" Margin="0,12,0,0">
-                <CheckBox Content="Provider" IsChecked="{Binding NewIsProvider}" Margin="0,0,20,0" VerticalAlignment="Center" />
-                <CheckBox Content="Customer" IsChecked="{Binding NewIsCustomer}" VerticalAlignment="Center" />
-            </StackPanel>
+			<StackPanel Orientation="Horizontal" Margin="0,12,0,0">
+				<CheckBox Content="Provider" IsChecked="{Binding NewIsProvider}" Margin="0,0,20,0" VerticalAlignment="Center" />
+				<CheckBox Content="Customer" IsChecked="{Binding NewIsCustomer}" VerticalAlignment="Center" />
+			</StackPanel>
 
-            <Button Content="Create Partner" Command="{Binding CreateCommand}" Margin="0,20,0,0" />
-        </StackPanel>
+			<Button Content="Create Partner" Command="{Binding CreateCommand}" Margin="0,20,0,0" />
+			<Button Content="Export CSV" Command="{Binding ExportCsvCommand}" Margin="0,8,0,0" />
+		</StackPanel>
 
-        <DataGrid Grid.Column="1" ItemsSource="{Binding Partners}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="220" />
-                <DataGridCheckBoxColumn Header="Provider" Binding="{Binding IsProvider}" Width="90" />
-                <DataGridCheckBoxColumn Header="Customer" Binding="{Binding IsCustomer}" Width="90" />
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+		<DataGrid Grid.Column="1" ItemsSource="{Binding Partners}">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="220" />
+				<DataGridCheckBoxColumn Header="Provider" Binding="{Binding IsProvider}" Width="90" />
+				<DataGridCheckBoxColumn Header="Customer" Binding="{Binding IsCustomer}" Width="90" />
+			</DataGrid.Columns>
+		</DataGrid>
+	</Grid>
 </UserControl>

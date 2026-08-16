@@ -1,45 +1,46 @@
 <UserControl x:Class="SteelTube.Desktop.Views.CatalogueView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="360" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="360" />
+			<ColumnDefinition Width="*" />
+		</Grid.ColumnDefinitions>
 
-        <StackPanel Grid.Column="0" Margin="0,0,32,0">
-            <TextBlock Text="Weight Catalogue" Style="{StaticResource HeaderText}" />
+		<StackPanel Grid.Column="0" Margin="0,0,32,0">
+			<TextBlock Text="Weight Catalogue" Style="{StaticResource HeaderText}" />
 
-            <TextBlock Text="{Binding ErrorMessage}" Style="{StaticResource ErrorBanner}"
+			<TextBlock Text="{Binding ErrorMessage}" Style="{StaticResource ErrorBanner}"
                         Visibility="{Binding ErrorMessage, Converter={StaticResource StringToVisibility}}" />
-            <TextBlock Text="{Binding SuccessMessage}" Style="{StaticResource SuccessBanner}"
+			<TextBlock Text="{Binding SuccessMessage}" Style="{StaticResource SuccessBanner}"
                         Visibility="{Binding SuccessMessage, Converter={StaticResource StringToVisibility}}" />
 
-            <TextBlock Text="Diameter (mm)" Style="{StaticResource FieldLabel}" />
-            <TextBox Text="{Binding DiameterMm, UpdateSourceTrigger=PropertyChanged}" />
+			<TextBlock Text="Diameter (mm)" Style="{StaticResource FieldLabel}" />
+			<TextBox Text="{Binding DiameterMm, UpdateSourceTrigger=PropertyChanged}" />
 
-            <TextBlock Text="Thickness (mm)" Style="{StaticResource FieldLabel}" />
-            <TextBox Text="{Binding ThicknessMm, UpdateSourceTrigger=PropertyChanged}" />
+			<TextBlock Text="Thickness (mm)" Style="{StaticResource FieldLabel}" />
+			<TextBox Text="{Binding ThicknessMm, UpdateSourceTrigger=PropertyChanged}" />
 
-            <TextBlock Text="Kg per meter" Style="{StaticResource FieldLabel}" />
-            <TextBox Text="{Binding KgPerMeter, UpdateSourceTrigger=PropertyChanged}" />
+			<TextBlock Text="Kg per meter" Style="{StaticResource FieldLabel}" />
+			<TextBox Text="{Binding KgPerMeter, UpdateSourceTrigger=PropertyChanged}" />
 
-            <StackPanel Orientation="Horizontal" Margin="0,20,0,0">
-                <Button Content="Add New Entry" Command="{Binding AddCommand}" Margin="0,0,12,0" />
-                <Button Content="Update Selected" Command="{Binding UpdateSelectedCommand}" />
-            </StackPanel>
-            <TextBlock Text="Diameter/Thickness above are used for Add. Update Selected only changes the kg/m of the row selected on the right."
+			<StackPanel Orientation="Horizontal" Margin="0,20,0,0">
+				<Button Content="Add New Entry" Command="{Binding AddCommand}" Margin="0,0,12,0" />
+				<Button Content="Update Selected" Command="{Binding UpdateSelectedCommand}" Margin="0,0,12,0" />
+				<Button Content="Export CSV" Command="{Binding ExportCsvCommand}" />
+			</StackPanel>
+			<TextBlock Text="Diameter/Thickness above are used for Add. Update Selected only changes the kg/m of the row selected on the right."
                        TextWrapping="Wrap" Style="{StaticResource FieldLabel}" />
-        </StackPanel>
+		</StackPanel>
 
-        <DataGrid Grid.Column="1" ItemsSource="{Binding Entries}" IsReadOnly="True"
+		<DataGrid Grid.Column="1" ItemsSource="{Binding Entries}" IsReadOnly="True"
                   SelectedItem="{Binding SelectedEntry}" SelectionMode="Single">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Diameter (mm)" Binding="{Binding DiameterMm}" Width="140" />
-                <DataGridTextColumn Header="Thickness (mm)" Binding="{Binding ThicknessMm}" Width="140" />
-                <DataGridTextColumn Header="Kg/m" Binding="{Binding KgPerMeter}" Width="120" />
-                <DataGridTextColumn Header="Updated" Binding="{Binding UpdatedAt, StringFormat={}{0:g}}" Width="160" />
-            </DataGrid.Columns>
-        </DataGrid>
-    </Grid>
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="Diameter (mm)" Binding="{Binding DiameterMm}" Width="140" />
+				<DataGridTextColumn Header="Thickness (mm)" Binding="{Binding ThicknessMm}" Width="140" />
+				<DataGridTextColumn Header="Kg/m" Binding="{Binding KgPerMeter}" Width="120" />
+				<DataGridTextColumn Header="Updated" Binding="{Binding UpdatedAt, StringFormat={}{0:g}}" Width="160" />
+			</DataGrid.Columns>
+		</DataGrid>
+	</Grid>
 </UserControl>
